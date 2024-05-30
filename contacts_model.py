@@ -14,22 +14,24 @@ class Contact:
     # mock contacts database
     db = {}
 
-    def __init__(self, id_=None, first=None, last=None, phone=None, email=None):
+    def __init__(self, id_=None, first=None, last=None, phone=None, email=None, linkedin=None,):
         self.id = id_
         self.first = first
         self.last = last
         self.phone = phone
         self.email = email
+        self.linkedin = linkedin
         self.errors = {}
 
     def __str__(self):
         return json.dumps(self.__dict__, ensure_ascii=False)
 
-    def update(self, first, last, phone, email):
+    def update(self, first, last, phone, email, linkedin):
         self.first = first
         self.last = last
         self.phone = phone
         self.email = email
+        self.linkedin = linkedin
 
     def validate(self):
         if not self.email:
@@ -76,7 +78,8 @@ class Contact:
             match_last = c.last is not None and text in c.last
             match_email = c.email is not None and text in c.email
             match_phone = c.phone is not None and text in c.phone
-            if match_first or match_last or match_email or match_phone:
+            match_linkedin = c.linkedin is not None and text in c.linkedin
+            if match_first or match_last or match_email or match_phone or match_linkedin:
                 result.append(c)
         return result
 
@@ -86,7 +89,7 @@ class Contact:
             contacts = json.load(contacts_file)
             cls.db.clear()
             for c in contacts:
-                cls.db[c['id']] = Contact(c['id'], c['first'], c['last'], c['phone'], c['email'])
+                cls.db[c['id']] = Contact(c['id'], c['first'], c['last'], c['phone'], c['email'], c['linkedin'],)
 
     @staticmethod
     def save_db():

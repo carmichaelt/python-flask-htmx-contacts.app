@@ -31,6 +31,11 @@
                     <input name="phone" id="phone" type="text" placeholder="Phone" value="{{ contact.phone }}">
                     <span class="error">{{ contact.errors['phone'] }}</span>
                 </p>
+                <p>
+                    <label for="linkedin">LinkedIn</label>
+                    <input name="linkedin" id="linkedin" type="text" placeholder="LinkedIn" value="{{ contact.linkedin }}">
+                    <span class="error">{{ contact.errors['linkedin'] }}</span>
+                </p>
             </div>
             <button>Save</button>
         </fieldset>
